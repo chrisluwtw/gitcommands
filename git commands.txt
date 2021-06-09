@@ -68,6 +68,15 @@ git log --graph --full-history --all --color \
 - git restore --source=HEAD --staged --worktree hello.c
 - git reset HEAD 文件名把暂存的状态取消，工作区内容不变，但状态变为“未暂存”。
 
+--how to get just one file from another branch
+-git checkout master               # first get back to master
+-git checkout experiment -- app.js (path/to/app.js) # then copy the version of app.js 
+                                   # from branch "experiment"
+With the new git switch and git restore commands, that would be:
+git switch master
+git restore --source experiment -- app.js
+
+
 简单来说，没有add过的修改，只需要git checkout -- 文件名即可撤销；add 过的修改，先git reset HEAD 文件名变成没add 过的修改，再git checkout -- 文件名撤销。操作示例可以看这张图
 
 - git reset --hard HEAD^ 会回退到上一个版本
@@ -81,11 +90,11 @@ git log --graph --full-history --all --color \
 - git checkout dev切换到dev分支
 - git checkout master ,dev分支的工作完成，我们就可以切换回master分支(此时在dev分支的修改在master上是看不到的)
 - git merge dev 这是在master分支上执行的命令，作用是：把dev分支上的工作成果合并到master分支上, merge 以后需要commit
-- git merge --squash, git checkout master,  git merge --squash bugfix, 这样bugFix的变化已经加到了master的index, 我们还需要git commit 才能把bugFix 的变化加到repo里
+- git merge --squash; flow-> git checkout master,  git merge --squash bugfix, 这样bugFix的变化已经加到了master的index, 我们还需要git commit 才能把bugFix 的变化加到repo里
 - git branch -d dev 删除已合并的分支。删除分支就是删除指针
 - git branch -D devGit友情提醒，dev分支还没有被合并，如果删除，将丢失掉修改，如果要强行删除，需要使用git branch -D dev命令
 - git rebase master变基。在当前分支(非master)下执行该命令，则相当于把当前分支和mater分支合并，和merge操作类似，但提交历史不同，rebase操作的log更干净。具体可参考Git 分支 - 变基
-- git checkout branch1, git checkout -b subbranch_of_b1 branch1: The above will create a new branch called subbranch_of_b1 under the branch branch1 (note that branch1 in the above command isn't mandatory since the HEAD is currently pointing to it, you can precise it if you are on a different branch though).
+- git checkout branch1; flow-> git checkout -b subbranch_of_b1 branch1: The above will create a new branch called subbranch_of_b1 under the branch branch1 (note that branch1 in the above command isn't mandatory since the HEAD is currently pointing to it, you can precise it if you are on a different branch though).
 解决冲突
 
 
