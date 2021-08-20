@@ -98,8 +98,7 @@ git restore --source experiment -- app.js
 解决冲突
 
 
-假设在master分支和feature1分支对同一文件做了修改
-
+假设在master分支和feature1分支对同一文件做了d
 - git merge feature1 在master分支上执行该命令，与feature1分支合并。这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突，果然冲突了！Git告诉我们，readme.txt文件存在冲突，必须手动解决冲突后再提交。git status也可以告诉我们冲突的文件
 
 合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息
@@ -129,3 +128,8 @@ Git还提供了一个stash功能，可以把当前工作现场“储藏”起来
 - git pull --merge If you pull remote changes with the flag --merge, which is also the default, then your local changes are merged with the remote changes. This results in a merge commit that points to the latest local commit and the latest remote commit. (会有一个merge commit)
 - git fetch --all && git rebase master; 首先git fetch --all 下载最新的remote下所有的分支, 然后切换到branch 比如bugfix,  在bugfix上 运行git rebase master 把最新的master的commit 放到bugFix最新的commit之前。保持线性历史记录
 - 
+
+-设置
+-git config --global core.autocrlf true  ,is set to true, that means that any time you add a file to the git repo that git thinks is a text file, it will turn all CRLF line endings to just LF before it stores it in the commit.
+-git config --global core.autocrlf false ,is set to false, no line-ending conversion is ever performed, so text files are checked in as-is. This usually works ok.
+-git config --global core.autocrlf false input, 设置为 input 时，添加文件git仓库时，git 把 crlf 编程 lf。当有人 Check 代码时还 是lf 方式。因此在 window操 作系统下，不要使用这个设置。
