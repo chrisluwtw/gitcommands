@@ -82,6 +82,7 @@ git restore --source experiment -- app.js
 - git reset --hard HEAD^ 会回退到上一个版本
 - git reset --hard 某版本号前几位通过命令行上的历史信息（假如你没清屏的话），找到某版本 的版本号回到指定版本。不一定要全部的版本号，就像这个命令的例子，只要前面的约7、8位这样就可以。
 分支管理
+- git reset --hard 不会删掉untracked file or folders, git clean -df (directory and file) to delete untracked files
 
 创建和合并分支
 
